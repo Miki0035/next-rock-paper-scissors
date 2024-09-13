@@ -1,11 +1,11 @@
 "use client";
-import React, { useContext } from "react";
+import React from "react";
 import Image from "next/image";
 import { IconType } from "@/types";
-import { GameContext } from "@/providers/ContextProvider";
+import { useGameContext } from "@/providers/ContextProvider";
 
-const SignButton = ({ img, btnType }: { img: string; btnType: IconType }) => {
-  const { setSelectedBtn } = useContext(GameContext);
+const SignButton = ({ img, btnType, setBtn }: { img: string; btnType: IconType; setBtn: (value: string) => void }) => {
+  const { setSelectedBtn } = useGameContext();
   let startColor = "";
   let endColor = "";
   switch (btnType) {
@@ -28,10 +28,10 @@ const SignButton = ({ img, btnType }: { img: string; btnType: IconType }) => {
       style={{
         backgroundImage: `linear-gradient(to right, hsl(${startColor}) , hsl(${endColor}))`,
       }}
-      className={`w-28 h-28 cursor-pointer rounded-full flex justify-center items-center mx-3 my-1`}
-      onClick={() => setSelectedBtn(btnType)}
+      className={` w-28 h-28 cursor-pointer md:w-32 md:h-32 rounded-full flex justify-center items-center mx-3 my-1 md:mx-8`}
+      onClick={() => setBtn(btnType)}
     >
-      <div className="w-20 h-20 flex justify-center items-center bg-[#fff] rounded-full">
+      <div className="w-20 h-20 md:w-24 md:h-24 flex justify-center items-center bg-[#fff] rounded-full">
         <Image src={img} alt="img" width={40} height={40} />
       </div>
     </div>

@@ -1,4 +1,3 @@
- Score Rules You Picked The House Picked You Win You Lose Play Again
     <div className="attribution">
       Challenge by{" "}
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">

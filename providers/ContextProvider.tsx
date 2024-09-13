@@ -1,6 +1,6 @@
 "use client"
 import { GameContextProps } from '@/types';
-import React, { ReactNode, useState, createContext } from 'react'
+import React, { ReactNode, useState, createContext, useContext } from 'react'
 
 const GameContext  = createContext<GameContextProps>({
     score: 0,
@@ -9,7 +9,7 @@ const GameContext  = createContext<GameContextProps>({
     setSelectedBtn: () => {}
 });
 
-const ContextProvider = ({ children }: {children : ReactNode }) => {
+export const ContextProvider = ({ children }: {children : ReactNode }) => {
     const [score, setScore] = useState(0)  
     const [selectedBtn, setSelectedBtn] = useState("")
   return (
@@ -24,4 +24,4 @@ const ContextProvider = ({ children }: {children : ReactNode }) => {
   )
 }
 
-export { ContextProvider ,  GameContext }
+export const useGameContext = () => useContext(GameContext)

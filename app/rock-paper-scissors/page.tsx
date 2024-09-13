@@ -10,7 +10,7 @@ const RockPaperScissorsPage = () => {
       <ScoreBoard />
       <GameBoard />
 
-      <button type="button" className='text-center py-2 px-8 rounded-md capitalize border border-1' onClick={() => setIsShowing(!isShowing)}>rules</button>
+      <button type="button" className='text-center py-2 px-8 rounded-md  border border-1 text-slate-50 uppercase hover:bg-[hsl(214,47%,10%)]' onClick={() => setIsShowing(!isShowing)}>rules</button>
       {
         isShowing ? (<RulesModal close={() => setIsShowing(!isShowing)}/>) : <></>
       }

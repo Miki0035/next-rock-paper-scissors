@@ -4,7 +4,7 @@ export type RulesModalProps = {
     close: () => void
 }
 
-export type IconType =   "P"  |  "S"  | "R" 
+export type IconType =   "P"  |  "S"  | "R" | ""
 
 export type gameOneIconType = {
     img: string;
