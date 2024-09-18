@@ -7,7 +7,7 @@ import { IoArrowBackCircleSharp } from "react-icons/io5";
 const ScoreBoard = ({ imageUrl }: { imageUrl: string }) => {
   const { score, gameReset } = useGameContext();
   return (
-    <div className="w-full flex items-center justify-evenly mt-10">
+    <section className="w-full flex items-center justify-evenly mt-10">
       <div className="w-full max-w-[500px] py-2 px-2 items-center flex justify-between rounded-md border border-2 border-headerOutline">
         <div className="flex flex-col items-start justify-center py-3">
           <Image src={imageUrl} width={90} height={90} alt="logo" />
@@ -26,7 +26,7 @@ const ScoreBoard = ({ imageUrl }: { imageUrl: string }) => {
           <p className="text-5xl text-headerOutline font-bold">{score}</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

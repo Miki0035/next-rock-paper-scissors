@@ -9,7 +9,7 @@ import pentagon from "../../assets/images/bg-pentagon.svg";
 const RockPaperScissorsLizardSpockPage = () => {
   const [isShowing, setIsShowing] = useState(false);
   return (
-    <div className="flex flex-col justify-between items-center pb-10 bg-gradient-to-b from-[color:hsl(214,47%,23%)] to-[color:hsl(237,49%,15%)] h-screen ">
+    <main className="flex flex-col justify-between items-center pb-10 bg-gradient-to-b from-[color:hsl(214,47%,23%)] to-[color:hsl(237,49%,15%)] h-screen ">
       <ScoreBoard imageUrl={RockPaperScissorsLizardSpockLogo} />
       <GameBoard imageUrl={pentagon} gameIcons={gameTwoIcons} />
 
@@ -28,7 +28,7 @@ const RockPaperScissorsLizardSpockPage = () => {
       ) : (
         <></>
       )}
-    </div>
+    </main>
   );
 };
 

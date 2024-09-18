@@ -74,7 +74,7 @@ const GameBoard = ({
   }, [gameResult]);
 
   return (
-    <div className="w-full flex justify-center items-center">
+    <section className="w-full flex justify-center items-center">
       {!selectedBtn ? (
         <div className="relative w-full h-96 flex justify-center">
           <div className="absolute w-full top-20 left-0 z-10 flex justify-center gameboard-image">
@@ -159,7 +159,7 @@ const GameBoard = ({
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

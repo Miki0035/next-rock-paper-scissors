@@ -11,7 +11,7 @@ const RockPaperScissorsPage = () => {
   const [isShowing, setIsShowing] = useState(false);
 
   return (
-    <div className="flex flex-col justify-between items-center pb-10 bg-gradient-to-b from-[color:hsl(214,47%,23%)] to-[color:hsl(237,49%,15%)] h-screen ">
+    <main className="flex flex-col justify-between items-center pb-10 bg-gradient-to-b from-[color:hsl(214,47%,23%)] to-[color:hsl(237,49%,15%)] h-screen ">
       <ScoreBoard imageUrl={RockPaperScissorsLogo} />
       <GameBoard imageUrl={triangle} gameIcons={gameOneIcons} />
 
@@ -30,7 +30,7 @@ const RockPaperScissorsPage = () => {
       ) : (
         <></>
       )}
-    </div>
+    </main>
   );
 };
 
