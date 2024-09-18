@@ -41,25 +41,29 @@ const SignButton = ({
   }
 
   return (
-    <div
-      style={{
-        backgroundImage: `linear-gradient(to right, hsl(${startColor}) , hsl(${endColor}))`,
-      }}
-      className={` ${
-        gameMode === 1
-          ? `pentagon-item-${index + 1} w-20 h-20 md:w-28 md:h-28`
-          : "w-28 h-28  md:w-32 md:h-32 md:mx-8"
-      }  cursor-pointer rounded-full flex justify-center items-center mx-5 my-1 `}
-      onClick={() => setBtn(btnType)}
-    >
+    <>
       <div
+        style={{
+          backgroundImage: `linear-gradient(to right, hsl(${startColor}) , hsl(${endColor}))`,
+        }}
         className={` ${
-          gameMode === 1 ? `w-14 h-14 md:w-20 md:h-20` : "w-20 h-20 md:w-24 md:h-24"
-        } flex justify-center items-center bg-[#fff] rounded-full`}
+          gameMode === 1
+            ? `pentagon-item-${index + 1} w-20 h-20 md:w-28 md:h-28`
+            : "w-28 h-28  md:w-32 md:h-32 md:mx-8"
+        }   cursor-pointer rounded-full flex justify-center items-center mx-5 my-1`}
+        onClick={() => setBtn(btnType)}
       >
-        <Image src={img} alt="img" width={40} height={40} />
+        <div
+          className={` ${
+            gameMode === 1
+              ? `w-14 h-14 md:w-20 md:h-20`
+              : "w-20 h-20 md:w-24 md:h-24"
+          } flex justify-center items-center bg-[#fff] rounded-full`}
+        >
+          <Image src={img} alt="img" width={40} height={40} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

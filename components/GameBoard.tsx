@@ -13,20 +13,25 @@ const GameBoard = ({
   imageUrl: string;
   gameIcons: gameIconType[];
 }) => {
-  const { selectedBtn, setSelectedBtn, setScore } = useGameContext();
+  const {
+    selectedBtn,
+    setSelectedBtn,
+    setScore,
+    setResult,
+    result,
+    gameReset,
+  } = useGameContext();
   const [houseSelected, setHouseSelected] = useState<gameIconType>({
     img: "",
     btnType: "",
   });
-  const [result, setResult] = useState("");
+  // colors result
   const [resultTextColor, setResultTextColor] = useState("");
+  // determines which game your playing
   const [gameMode] = useState(gameIcons.length > 3 ? 1 : 0);
-  const gameOneIcon = gameIcons.filter((icon) => icon.btnType === selectedBtn);
 
-  const gameReset = () => {
-    setSelectedBtn("");
-    setResult("");
-  };
+  //gets the user selected icon
+  const gameOneIcon = gameIcons.filter((icon) => icon.btnType === selectedBtn);
 
   const changeUserSelection = (btnType: string) => {
     setSelectedBtn(btnType);
@@ -43,7 +48,7 @@ const GameBoard = ({
 
   // sets house selection
   // determine win or loose
-  //set results
+  // set results
   const gameResult = useCallback(() => {
     if (selectedBtn) {
       switch (selectedBtn) {
@@ -103,6 +108,7 @@ const GameBoard = ({
     result,
     houseSelected.btnType,
     setScore,
+    setResult,
     setResultTextColor,
   ]);
 
@@ -135,9 +141,9 @@ const GameBoard = ({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-20 lg:flex-row lg:justify-center">
+        <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-center">
           <div className="flex gap-10 items-center">
-            <div className={`flex flex-col  items-center gap-5 `}>
+            <div className={`flex flex-col items-center gap-5 lg:flex-col-reverse `}>
               <div className=" flex justify-center rounded-full">
                 <SignButton
                   index={0}
@@ -151,7 +157,21 @@ const GameBoard = ({
                 you picked
               </h5>
             </div>
-            <div className="flex flex-col items-center gap-5">
+            <div className="hidden lg:flex w-full flex-col items-center">
+              <h5
+                style={{ color: resultTextColor }}
+                className={`uppercase text-5xl font-bold text-slate-50 mb-5`}
+              >
+                {result}
+              </h5>
+              <button
+                className="uppercase bg-slate-50 text-center text-sm py-3 w-48 rounded-md"
+                onClick={gameReset}
+              >
+                play again
+              </button>
+            </div>
+            <div className="relative lg:w-72 flex flex-col items-center gap-5  lg:flex-col-reverse">
               <SignButton
                 index={0}
                 gameMode={gameMode}
@@ -164,7 +184,7 @@ const GameBoard = ({
               </h5>
             </div>
           </div>
-          <div className="w-full flex flex-col items-center">
+          <div className="lg:hidden mb-8 w-full flex flex-col items-center">
             <h5
               style={{ color: resultTextColor }}
               className={`uppercase text-5xl font-bold text-slate-50 mb-5`}

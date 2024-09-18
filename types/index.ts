@@ -17,4 +17,7 @@ export type GameContextProps = {
   setScore: Dispatch<SetStateAction<number>>;
   selectedBtn: string;
   setSelectedBtn: Dispatch<SetStateAction<string>>;
+  gameReset: () => void;
+  setResult: Dispatch<SetStateAction<string>>;
+  result: string;
 };
