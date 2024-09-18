@@ -30,3 +30,101 @@
   --scoreText: hsl(229, 64%, 46%);
   --headerOutline: hsl(217, 16%, 45%);
 }
+
+
+
+ /* Used To Style Pentagon Buttons */
+ /* .item-1 {
+  left: 200px;
+
+}
+
+.item-2 {
+  top: 50%;
+  right: 70%;
+  transform: translateX(50%);
+}
+
+.item-3 {
+  top: 50%;
+  left: 35%;
+  transform: translateY(100%);
+
+}
+
+.item4 {
+  bottom: 10%;
+  left: 10%;
+  transform: translateY(50%);
+}
+
+.item5 {
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
+}
+ */
+/* Place this in your global CSS file */
+.pentagon-item-1 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+}
+
+.pentagon-item-2 {
+  margin-left: 1rem;
+  margin-right: 0;
+  margin-top: 1.5rem;
+}
+
+.pentagon-item-3 {
+  margin-left: auto;
+  margin-right: 1rem;
+  margin-top: 5rem;
+}
+
+.pentagon-item-4 {
+  margin-left: 1.5rem;
+  margin-right: auto;
+  margin-top: 2rem;
+}
+
+.pentagon-item-5 {
+  margin-left: 0;
+  margin-right: 2rem;
+  margin-top: 2rem;
+}
+
+
+@media screen and (min-width: 760px) {
+
+  .pentagon-item-1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
+  }
+
+  .pentagon-item-2 {
+    margin-left: 1rem;
+    margin-right: 0;
+    margin-top: 0rem;
+  }
+
+  .pentagon-item-3 {
+    margin-left: auto;
+    margin-right: 1rem;
+    margin-top: 4rem;
+  }
+  .pentagon-item-5 {
+    margin-left: 0;
+    margin-right: 2rem;
+    margin-top: 1rem;
+  }
+
+  .pentagon-item-4 {
+    margin-left: 1.5rem;
+    margin-right: auto;
+    margin-top: 1rem;
+  }
+  
+}

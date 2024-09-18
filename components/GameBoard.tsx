@@ -1,22 +1,27 @@
 "use client";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
-import triangle from "../assets/images/bg-triangle.svg";
 import SignButton from "./SignButton";
-import { gameOneIcons } from "@/constants";
 import { useGameContext } from "@/providers/ContextProvider";
-import { gameOneIconType } from "@/types";
-const GameBoard = () => {
+import { gameIconType } from "@/types";
+
+// Component
+const GameBoard = ({
+  imageUrl,
+  gameIcons,
+}: {
+  imageUrl: string;
+  gameIcons: gameIconType[];
+}) => {
   const { selectedBtn, setSelectedBtn, setScore } = useGameContext();
-  const [houseSelected, setHouseSelected] = useState<gameOneIconType>({
+  const [houseSelected, setHouseSelected] = useState<gameIconType>({
     img: "",
     btnType: "",
   });
   const [result, setResult] = useState("");
   const [resultTextColor, setResultTextColor] = useState("");
-  const gameOneIcon = gameOneIcons.filter(
-    (icon) => icon.btnType === selectedBtn
-  );
+  const [gameMode] = useState(gameIcons.length > 3 ? 1 : 0);
+  const gameOneIcon = gameIcons.filter((icon) => icon.btnType === selectedBtn);
 
   const gameReset = () => {
     setSelectedBtn("");
@@ -25,11 +30,20 @@ const GameBoard = () => {
 
   const changeUserSelection = (btnType: string) => {
     setSelectedBtn(btnType);
-    const randomIndex = Math.floor(Math.random() * 3);
-    setHouseSelected(gameOneIcons[randomIndex]);
+
+    if (gameMode === 0) {
+      const randomIndex = Math.floor(Math.random() * 3);
+      setHouseSelected(gameIcons[randomIndex]);
+    } else {
+      const randomIndex = Math.floor(Math.random() * 5);
+      setHouseSelected(gameIcons[randomIndex]);
+    }
     gameResult();
   };
 
+  // sets house selection
+  // determine win or loose
+  //set results
   const gameResult = useCallback(() => {
     if (selectedBtn) {
       switch (selectedBtn) {
@@ -37,16 +51,37 @@ const GameBoard = () => {
           if (houseSelected.btnType === "P") setResult("you lose");
           if (houseSelected.btnType === "S") setResult("you win");
           if (houseSelected.btnType === "R") setResult("draw");
+          if (houseSelected.btnType === "L") setResult("you win");
+          if (houseSelected.btnType === "SP") setResult("you lose");
           break;
         case "P":
           if (houseSelected.btnType === "P") setResult("draw");
           if (houseSelected.btnType === "S") setResult("you lose");
           if (houseSelected.btnType === "R") setResult("you win");
+          if (houseSelected.btnType === "L") setResult("you lose");
+          if (houseSelected.btnType === "SP") setResult("you win");
           break;
         case "S":
           if (houseSelected.btnType === "P") setResult("you win");
           if (houseSelected.btnType === "S") setResult("draw");
           if (houseSelected.btnType === "R") setResult("you lose");
+          if (houseSelected.btnType === "L") setResult("you win");
+          if (houseSelected.btnType === "SP") setResult("you lose");
+          break;
+        case "L":
+          if (houseSelected.btnType === "P") setResult("you win");
+          if (houseSelected.btnType === "S") setResult("you lose");
+          if (houseSelected.btnType === "R") setResult("you lose");
+          if (houseSelected.btnType === "SP") setResult("you win");
+          if (houseSelected.btnType === "L") setResult("draw");
+          break;
+
+        case "SP":
+          if (houseSelected.btnType === "P") setResult("you lose");
+          if (houseSelected.btnType === "S") setResult("you win");
+          if (houseSelected.btnType === "R") setResult("you win");
+          if (houseSelected.btnType === "SP") setResult("draw");
+          if (houseSelected.btnType === "L") setResult("you lose");
           break;
       }
 
@@ -70,6 +105,7 @@ const GameBoard = () => {
     setScore,
     setResultTextColor,
   ]);
+
   useEffect(() => {
     gameResult();
   }, [gameResult]);
@@ -77,14 +113,16 @@ const GameBoard = () => {
   return (
     <div className="w-full flex justify-center items-center">
       {!selectedBtn ? (
-        <div className="relative w-full h-64 flex justify-center">
-          <div className="absolute w-full top-20 left-0 z-10 flex justify-center">
-            <Image src={triangle} width={150} height={100} alt="triangle" />
+        <div className="relative w-full h-96 flex justify-center">
+          <div className="absolute w-full top-20 left-0 z-10 flex justify-center gameboard-image">
+            <Image src={imageUrl} width={200} height={100} alt="triangle" />
           </div>
           <div className="absolute w-full flex justify-center top-5 left-0 z-20">
-            <div className="w-80 md:w-96 flex-wrap flex justify-center ">
-              {gameOneIcons.map((icon) => (
+            <div className="w-80 md:w-96 flex-wrap flex  justify-center ">
+              {gameIcons.map((icon, index) => (
                 <SignButton
+                  index={index}
+                  gameMode={gameMode}
                   key={icon.img}
                   img={icon.img}
                   btnType={icon.btnType}
@@ -97,11 +135,13 @@ const GameBoard = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-20">
+        <div className="flex flex-col items-center gap-20 lg:flex-row lg:justify-center">
           <div className="flex gap-10 items-center">
             <div className={`flex flex-col  items-center gap-5 `}>
               <div className=" flex justify-center rounded-full">
                 <SignButton
+                  index={0}
+                  gameMode={gameMode}
                   img={gameOneIcon[0].img}
                   btnType={gameOneIcon[0].btnType}
                   setBtn={(btnType) => setSelectedBtn(btnType)}
@@ -113,6 +153,8 @@ const GameBoard = () => {
             </div>
             <div className="flex flex-col items-center gap-5">
               <SignButton
+                index={0}
+                gameMode={gameMode}
                 img={houseSelected.img}
                 btnType={houseSelected.btnType}
                 setBtn={() => {}}

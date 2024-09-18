@@ -1,9 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import Rules from "../assets/images/image-rules.svg";
 import { IoClose } from "react-icons/io5";
 
-const RulesModal = ({ close }: { close: () => void }) => {
+const RulesModal = ({ close , imageUrl }: { close: () => void; imageUrl: string }) => {
   return (
     <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center ">
       <div className=" absolute z-10 w-screen h-screen bg-[#000] opacity-50"></div>
@@ -20,7 +19,7 @@ const RulesModal = ({ close }: { close: () => void }) => {
           </button>
         </div>
         <div className="w-4/5 flex justify-center">
-          <Image src={Rules} width={350} height={350} alt="image rules" />
+          <Image src={imageUrl} width={350} height={350} alt="image rules" />
         </div>
         <button
           className="w-full lg:hidden flex justify-center mt-10"
