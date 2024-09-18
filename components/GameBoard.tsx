@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import SignButton from "./SignButton";
 import { useGameContext } from "@/providers/ContextProvider";
 import { gameIconType } from "@/types";
+import { getResult } from "@/utils";
 
 // Component
 const GameBoard = ({
@@ -51,45 +52,8 @@ const GameBoard = ({
   // set results
   const gameResult = useCallback(() => {
     if (selectedBtn) {
-      switch (selectedBtn) {
-        case "R":
-          if (houseSelected.btnType === "P") setResult("you lose");
-          if (houseSelected.btnType === "S") setResult("you win");
-          if (houseSelected.btnType === "R") setResult("draw");
-          if (houseSelected.btnType === "L") setResult("you win");
-          if (houseSelected.btnType === "SP") setResult("you lose");
-          break;
-        case "P":
-          if (houseSelected.btnType === "P") setResult("draw");
-          if (houseSelected.btnType === "S") setResult("you lose");
-          if (houseSelected.btnType === "R") setResult("you win");
-          if (houseSelected.btnType === "L") setResult("you lose");
-          if (houseSelected.btnType === "SP") setResult("you win");
-          break;
-        case "S":
-          if (houseSelected.btnType === "P") setResult("you win");
-          if (houseSelected.btnType === "S") setResult("draw");
-          if (houseSelected.btnType === "R") setResult("you lose");
-          if (houseSelected.btnType === "L") setResult("you win");
-          if (houseSelected.btnType === "SP") setResult("you lose");
-          break;
-        case "L":
-          if (houseSelected.btnType === "P") setResult("you win");
-          if (houseSelected.btnType === "S") setResult("you lose");
-          if (houseSelected.btnType === "R") setResult("you lose");
-          if (houseSelected.btnType === "SP") setResult("you win");
-          if (houseSelected.btnType === "L") setResult("draw");
-          break;
-
-        case "SP":
-          if (houseSelected.btnType === "P") setResult("you lose");
-          if (houseSelected.btnType === "S") setResult("you win");
-          if (houseSelected.btnType === "R") setResult("you win");
-          if (houseSelected.btnType === "SP") setResult("draw");
-          if (houseSelected.btnType === "L") setResult("you lose");
-          break;
-      }
-
+      const result = getResult(selectedBtn, houseSelected);
+      setResult(result);
       if (result.trim() === "you win".trim()) {
         setScore((prevScore) => prevScore + 1);
         setResultTextColor("hsl(119,99%,41%)");
@@ -103,14 +67,7 @@ const GameBoard = ({
         setResultTextColor("hsl(39,89%,49%)");
       }
     }
-  }, [
-    selectedBtn,
-    result,
-    houseSelected.btnType,
-    setScore,
-    setResult,
-    setResultTextColor,
-  ]);
+  }, [selectedBtn, houseSelected, setScore, setResult, setResultTextColor]);
 
   useEffect(() => {
     gameResult();
@@ -143,7 +100,9 @@ const GameBoard = ({
       ) : (
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-center">
           <div className="flex gap-10 items-center">
-            <div className={`flex flex-col items-center gap-5 lg:flex-col-reverse `}>
+            <div
+              className={`flex flex-col items-center gap-5 lg:flex-col-reverse `}
+            >
               <div className=" flex justify-center rounded-full">
                 <SignButton
                   index={0}
